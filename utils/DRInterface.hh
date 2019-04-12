@@ -43,7 +43,6 @@
 #include "dr_request.pb.h"
 #include "model_cmd.pb.h"
 #include "dr_response.pb.h"
-
 // Debug streams
 #include "debug.hh"
 
@@ -239,13 +238,30 @@ class DRInterface
     /// \param diffuse The diffuse color
     /// \param emissive The emissive color
     /// \param specular The specular color
+    // public: void addColors(gazebo::msgs::Visual & msg,
+    //     const std::string & visual,
+    //     const std::string & parent,
+    //     const common::Color & ambient,
+    //     const common::Color & diffuse,
+    //     const common::Color & emissive,
+    //     const common::Color & specular);
+
     public: void addColors(gazebo::msgs::Visual & msg,
         const std::string & visual,
         const std::string & parent,
-        const ignition::math::Color & ambient,
-        const ignition::math::Color & diffuse,
-        const ignition::math::Color & emissive,
-        const ignition::math::Color & specular);
+        const gazebo::common::Color & ambient,
+        const gazebo::common::Color & diffuse,
+        const gazebo::common::Color & emissive,
+        const gazebo::common::Color & specular);
+
+    // public: void addColors(gazebo::msgs::Visual & msg,
+    //     const std::string & visual,
+    //     const std::string & parent,
+    //     const ignition::math::Color & ambient,
+    //     const ignition::math::Color & diffuse,
+    //     const ignition::math::Color & emissive,
+    //     const ignition::math::Color & specular);
+
 
     /// \brief Callback on DRPlugin response
     /// \param _msg Response message

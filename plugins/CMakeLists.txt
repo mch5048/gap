@@ -12,4 +12,4 @@ add_subdirectory(camera_utils)
 # Visual tools plugin
 add_subdirectory(visual_utils)
 # World tools plugin
-add_subdirectory(world_utils)
+# a dd_subdirectory(world_utils)

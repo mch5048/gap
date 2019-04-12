@@ -245,14 +245,23 @@ void DRInterface::addModelCmd(DRRequest & msg,
 }
 
 //////////////////////////////////////////////////
+// void DRInterface::addColors(gazebo::msgs::Visual & msg,
+//     const std::string & visual,
+//     const std::string & parent,
+//     const ignition::math::Color & ambient,
+//     const ignition::math::Color & diffuse,
+//     const ignition::math::Color & emissive,
+//     const ignition::math::Color & specular)
+
 void DRInterface::addColors(gazebo::msgs::Visual & msg,
     const std::string & visual,
     const std::string & parent,
-    const ignition::math::Color & ambient,
-    const ignition::math::Color & diffuse,
-    const ignition::math::Color & emissive,
-    const ignition::math::Color & specular)
+    const gazebo::common::Color & ambient,
+    const gazebo::common::Color & diffuse,
+    const gazebo::common::Color & emissive,
+    const gazebo::common::Color & specular)
 {
+
     gazebo::msgs::Material *material_msg;
     gazebo::msgs::Color *ambient_msg,
         *diffuse_msg, *emissive_msg, *specular_msg;

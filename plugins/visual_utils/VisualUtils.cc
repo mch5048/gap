@@ -51,9 +51,12 @@ class VisualUtilsPrivate
     public: std::vector<std::string> materials;
     /// Internal counter for used materials
     public: unsigned int used_materials {0};
-
+ 
     /// Default pose
-    public: ignition::math::Pose3d default_pose;
+    // public: ignition::math::Pose3d default_pose;
+    public: math::Pose default_pose;
+    // public: math::Pose3d default_pose;
+    // Pose3d default_pose;
 
     /// Mutex
     public: std::mutex mutex;
@@ -66,11 +69,13 @@ class VisualUtilsPrivate
     public: bool update_scale {false};
 
     /// New pose
-    public: ignition::math::Pose3d new_pose;
+    // public: ignition::math::Pose3d new_pose;
+    public: math::Pose new_pose;
     /// New material
     public: std::string new_material;
     /// New scale
-    public: ignition::math::Vector3d new_scale;
+    // public: ignition::math::Vector3d new_scale;
+    public: math::Vector3 new_scale;
 };
 
 /// Register this plugin with the simulator
@@ -137,7 +142,8 @@ void VisualUtils::Load(rendering::VisualPtr _visual, sdf::ElementPtr _sdf)
         Advertise<gap::msgs::VisualUtilsResponse>(RESPONSE_TOPIC);
 
     // Default pose
-    dataPtr->default_pose = _visual->Pose();
+    // dataPtr->default_pose = _visual->Pose();
+    dataPtr->default_pose = _visual->GetPose();
     // Load materials
     loadResources();
 
@@ -154,7 +160,11 @@ void VisualUtils::Update()
 
     // Update scale
     if (dataPtr->update_scale) {
-        if (dataPtr->visual->Scale() != dataPtr->new_scale) {
+
+        // if (dataPtr->visual->Scale() != dataPtr->new_scale) {
+        //     dataPtr->visual->SetScale(dataPtr->new_scale);
+        // }
+        if (dataPtr->visual->GetScale() != dataPtr->new_scale) {
             dataPtr->visual->SetScale(dataPtr->new_scale);
         }
         dataPtr->update_scale = false;
@@ -162,7 +172,7 @@ void VisualUtils::Update()
     }
     // Update pose
     if (dataPtr->update_pose) {
-        if (dataPtr->visual->WorldPose() != dataPtr->new_pose) {
+        if (dataPtr->visual->GetWorldPose() != dataPtr->new_pose) {
             dataPtr->visual->SetWorldPose(dataPtr->new_pose);
         }
         dataPtr->update_pose = false;

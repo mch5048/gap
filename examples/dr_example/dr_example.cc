@@ -62,10 +62,10 @@ int main(int _argc, char **_argv)
             double g = getRandomDouble(0,1);
             double b = getRandomDouble(0,1);
             interface.addColors(color_msg, visual, parent,
-                Color(r, g, b),
-                Color(r, g, b),
-                Color(0.1, 0,    0.1),
-                Color(0.2, 0.2,  0.2, 64));
+                gazebo::common::Color(r, g, b),
+                gazebo::common::Color(r, g, b),
+                gazebo::common::Color(0.1, 0,    0.1),
+                gazebo::common::Color(0.2, 0.2,  0.2, 64));
             interface.publish(color_msg);
         }
         waitMs(500);

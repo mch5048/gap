@@ -72,7 +72,7 @@ void DRPlugin::Load(physics::WorldPtr _world, sdf::ElementPtr _sdf)
 {
     NULL_CHECK(_world, "World pointer is NULL");
     this->world = _world;
-    this->physics_engine = world->Physics();
+    this->physics_engine = world->GetPhysicsEngine();
 
     // Read topic names from SDF
     loadTopicNames(_sdf);
@@ -175,11 +175,13 @@ void DRPlugin::processPhysics(const msgs::Physics & msg)
 /////////////////////////////////////////////////
 void DRPlugin::processModel(const msgs::Model & msg)
 {
+    
     physics::ModelPtr model;
     ignition::math::Vector3d scale;
 
     std::string model_name = msg.name();
-    model = world->ModelByName(model_name);
+    // model = world->ModelByName(model_name);
+    model = world->GetModel(model_name);
     NULL_CHECK(model, "Model not found:" + model_name);
 
     for (const auto & joint : msg.joint())
@@ -326,7 +328,8 @@ void DRPlugin::processModelCmd(
     physics::ModelPtr model;
 
     model_name = msg.model_name();
-    model = world->ModelByName(model_name);
+    // model = world->ModelByName(model_name);
+    model = world->GetModel(model_name);
     NULL_CHECK(model, "Model not found");
 
     for (const auto & joint_cmd : msg.joint_cmd())
