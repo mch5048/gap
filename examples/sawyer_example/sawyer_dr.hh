@@ -50,3 +50,4 @@ double getRandomDouble(double min, double max);
 /// \brief Waits a given number of ms
 /// \param delay Amount of ms to wait
 void inline waitMs(int delay);
+

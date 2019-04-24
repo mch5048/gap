@@ -52,8 +52,7 @@ DRInterface::DRInterface(
 
 //////////////////////////////////////////////////
 DRInterface::DRInterface() : DRInterface(REQUEST_TOPIC, RESPONSE_TOPIC)
-{
-}
+{}
 
 //////////////////////////////////////////////////
 DRInterface::~DRInterface()

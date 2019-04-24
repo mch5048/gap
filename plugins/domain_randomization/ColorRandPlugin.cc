@@ -23,7 +23,7 @@
     \author João Borrego : jsbruglie
 */
 
-#include "DRPlugin.hh"
+#include "ColorRandPlugin.hh"
 
 namespace gazebo {
 

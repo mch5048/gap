@@ -27,7 +27,8 @@ link_directories(${PROJECT_BINARY_DIR}/utils)
 
 # Gazebo visual utils plugin
 add_library(DRPlugin SHARED
-	DRPlugin.cc )
+  DRPlugin.cc )
+
 target_link_libraries(DRPlugin
     gap_msgs
     gap_debug
@@ -35,6 +36,7 @@ target_link_libraries(DRPlugin
 add_dependencies(DRPlugin
 	gap_debug
     gap_msgs)
+
 
 # Install library
 install(TARGETS DRPlugin

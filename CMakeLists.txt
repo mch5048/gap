@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 
 # Project name
-project(gap VERSION 1.5.0)
+project(color_randomization VERSION 1.5.0)
 message (STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 string (TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
 string (TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
+
+## Add support for C++11, supported in ROS Kinetic and newer
+add_definitions(-std=c++11)
 
 # Additional cmake modules
 set(CMAKE_MODULE_PATH
@@ -14,10 +17,20 @@ set(CMAKE_MODULE_PATH
 # CMake safeguards e.g. prevent in-source builds
 include(safeguards)
 
+# Load catkin and all dependencies required for this package
+find_package(catkin REQUIRED COMPONENTS 
+  roscpp 
+  gazebo_ros 
+)
+
 # Check dependencies
 find_package(Boost COMPONENTS system REQUIRED)
 find_package(gazebo REQUIRED)
 find_package(Protobuf REQUIRED)
+
+link_directories(${GAZEBO_LIBRARY_DIRS})
+include_directories(${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
+include_directories(${ADDITIONAL_INCLUDE_DIRS} ${OGRE_INCLUDE_DIRS}/Paging)
 
 # Setup directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
@@ -69,3 +82,9 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${cmake_conf_file}
     ${CMAKE_CURRENT_BINARY_DIR}/${cmake_version_file}
     DESTINATION ${msgs_lib_dest}/
     COMPONENT cmake)
+
+catkin_package(
+DEPENDS 
+    roscpp 
+    gazebo_ros 
+)
